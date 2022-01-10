@@ -1,0 +1,17 @@
+{
+  "name": "cinehome-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^4.6.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.5",
+    "nodefly": "^0.1.46"
+  }
+}
