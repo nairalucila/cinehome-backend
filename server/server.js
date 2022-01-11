@@ -11,6 +11,8 @@ app.use(express.urlencoded({
 }));
 
 app.use(require('./Pedidos/pedidos-router'));
+app.use(require('./Usuarios/usuarios-router'));
+
 app.get('/', function (req, res) {
    res.send('Bienvenido');
 });

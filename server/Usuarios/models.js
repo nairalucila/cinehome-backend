@@ -2,14 +2,12 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const usuarioSchema = new Schema({
-  id: {
-    type: Number,
-    unique: true,
-  },
+  id: Number,
   nombreUsuario: String,
   email: { type: String, unique: true },
   contrasenia: String,
   telefono: String,
+  rol: String
 });
 
 const usuarioLoginSchema = new Schema({
