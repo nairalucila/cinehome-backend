@@ -41,5 +41,5 @@ const eliminarUsuario = async function (req, res) {
 module.exports = {
   registrarUsuario,
   traerUsuarios,
-eliminarUsuario
+  eliminarUsuario
 };
