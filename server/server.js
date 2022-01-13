@@ -3,13 +3,16 @@ const PORT = 3000;
 const HOSTNAME = 'localhost';
 var app = express();
 const mongoConect = require('./db/db')
-//const MongoStore = require('connect-mongo');
+const jwt = require('jsonwebtoken');
+const config = require('./config/config');
 
-app.use(express.json());
+app.set('llave', config.llave);
 app.use(express.urlencoded({
-   extended: false
+   extended: true
 }));
+app.use(express.json());
 
+// RUTAS
 app.use(require('./Pedidos/pedidos-router'));
 app.use(require('./Usuarios/usuarios-router'));
 

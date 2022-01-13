@@ -1,4 +1,11 @@
 const Usuario = require("./models").Usuario;
+const jwt = require("jsonwebtoken");
+const config = require("../config/config");
+const express = require('express');
+const app = express();
+//const {llaveSeteada} = require('../server');
+
+
 
 const registrarUsuario = async function (req, res) {
   try {
@@ -9,6 +16,28 @@ const registrarUsuario = async function (req, res) {
     return res
       .status(400)
       .send({ error: error, mensaje: "Hubo un problema con su petición" });
+  }
+};
+
+const verificarUsuario = async function (req, res) {
+  try {
+    let usuarioEntrante = req.body;
+
+    let result = await Usuario.findOne({
+      email: usuarioEntrante.email,
+      contrasenia: usuarioEntrante.contrasenia,
+    });
+    //TAREAS DE TOKEN
+    if (result) {
+     return res.status(200).send(result);
+    }else {
+      res.json({ mensaje: "Usuario o contraseña incorrectos"})
+    }
+  } catch (error) {
+    return res.status(400).send({
+      error: error,
+      mensaje: "No pudo ingresar al sistema, revise alguno de sus datos",
+    });
   }
 };
 
@@ -26,11 +55,11 @@ const traerUsuarios = async function (req, res) {
 const eliminarUsuario = async function (req, res) {
   try {
     let usuarioId = req.params.id;
-    let usuarioEliminado = await Usuario.deleteOne({ id: usuarioId })
-  
-    return res.status(200).json({obj: usuarioEliminado,
-    mensaje: "Eliminado con éxito"});
+    let usuarioEliminado = await Usuario.deleteOne({ id: usuarioId });
 
+    return res
+      .status(200)
+      .json({ obj: usuarioEliminado, mensaje: "Eliminado con éxito" });
   } catch (error) {
     return res
       .status(400)
@@ -41,5 +70,6 @@ const eliminarUsuario = async function (req, res) {
 module.exports = {
   registrarUsuario,
   traerUsuarios,
-  eliminarUsuario
+  eliminarUsuario,
+  verificarUsuario,
 };
