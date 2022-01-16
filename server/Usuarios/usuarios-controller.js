@@ -1,11 +1,9 @@
 const Usuario = require("./models").Usuario;
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
-const express = require('express');
+const express = require("express");
 const app = express();
 //const {llaveSeteada} = require('../server');
-
-
 
 const registrarUsuario = async function (req, res) {
   try {
@@ -21,17 +19,27 @@ const registrarUsuario = async function (req, res) {
 
 const verificarUsuario = async function (req, res) {
   try {
-    let usuarioEntrante = req.body;
-
+    let usuarioEntrante;
     let result = await Usuario.findOne({
-      email: usuarioEntrante.email,
-      contrasenia: usuarioEntrante.contrasenia,
+      email: req.body.email,
+      contrasenia: req.body.contrasenia,
     });
-    //TAREAS DE TOKEN
+
+    usuarioEntrante = {
+      email: result.email,
+      contrasenia: result.contrasenia,
+      rol: result.rol
+    }
+
     if (result) {
-     return res.status(200).send(result);
-    }else {
-      res.json({ mensaje: "Usuario o contraseña incorrectos"})
+      jwt.sign({ usuario: usuarioEntrante }, config.llave, (err, token) => {
+        return res.json({
+          token,
+          role: usuarioEntrante.rol
+        });
+      });
+    } else {
+      res.json({ mensaje: "Usuario o contraseña incorrectos" });
     }
   } catch (error) {
     return res.status(400).send({
