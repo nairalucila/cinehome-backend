@@ -35,6 +35,13 @@ export class NavbarComponent implements OnInit {
     }
    }
 
+   desloguearUsuario(){
+     this.cookie.deleteAll();
+     localStorage.clear();
+     this.esAdmin = false;
+     this.route.navigate(['/login']);
+   }
+
   ocultarBarraNavegacion(){
     // this.route.config.forEach(rutas => {
     //   if(rutas.path === "login" || rutas.path === "registro"){

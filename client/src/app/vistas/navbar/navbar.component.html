@@ -9,7 +9,7 @@
 
     <!-- AGREGAR FUNCION PARA SALIR -->
 
-    <button mat-button [disabled]="hayProductos">Salir</button>
+    <button mat-button (click)="desloguearUsuario()">Salir</button>
     <mat-menu #aboveMenu="matMenu" yPosition="above">
     </mat-menu>
 

@@ -44,9 +44,7 @@ export class LoginComponent implements OnInit {
           //cookieService.set('test', 'Hello World', { expires: 2, sameSite: 'Lax' });
 
           localStorage.setItem('INITIALIZACION_IN', usuario._id);
-          this.estaLogueado = true;
-          let saveLS = this.estaLogueado.toString();
-          localStorage.setItem('LOG_', saveLS);
+          
           this.route.navigate(['/home']);
         } else {
           this._snackBar.open('Porfavor regístrese', 'Error', {
