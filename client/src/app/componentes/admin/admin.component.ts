@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,6 +18,8 @@ export class AdminComponent implements OnInit {
   esInputVisible: boolean;
   listaUsuarios: Usuarios[] = [];
   listaPedidos: Pedido[] = [];
+  totalFacturado: number;
+  hayDinero: boolean;
 
   constructor(
     private usuarioService: UsuariosService,
@@ -24,15 +27,16 @@ export class AdminComponent implements OnInit {
     private pedidoService: PedidosService
   ) {
     this.esInputVisible = false;
+    this.totalFacturado = 0;
+    this.hayDinero = false;
   }
 
   ngOnInit(): void {
-    console.log("jdfhjskkfkfh")
+    console.log('jdfhjskkfkfh');
   }
 
   traerListaUsuarios() {
     this.usuarioService.traerUsuarios().subscribe((usuarios: Usuarios[]) => {
-     
       this.listaUsuarios = usuarios;
 
       for (let i = 0; i < usuarios.length; i++) {
@@ -44,6 +48,7 @@ export class AdminComponent implements OnInit {
   traerTodosLosPedidos() {
     this.pedidoService.traerTodosPedidos().subscribe((pedidos: Pedido[]) => {
       this.listaPedidos = pedidos;
+      this.facturarTotal(this.listaPedidos);
       return this.listaPedidos;
     });
   }
@@ -57,6 +62,17 @@ export class AdminComponent implements OnInit {
 
     let idValor = id.value;
     this.eliminarUsuario(idValor);
+  }
+
+  facturarTotal(pedidos: Pedido[]): number {
+    this.totalFacturado = pedidos
+      .map((t) => t.precio)
+      .reduce((a, b) => a + b, 0);
+
+    if (this.totalFacturado > 0) {
+      this.hayDinero = true;
+    }
+    return this.totalFacturado;
   }
 
   eliminarUsuario(id: string) {

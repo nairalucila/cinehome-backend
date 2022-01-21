@@ -1,53 +1,56 @@
-.admin-container{
+.admin-container {
   background-color: darkslategrey;
- // height: 1000vw;
-  
+  // height: 1000vw;
+  //overflow-x: hidden;
 
-  & .botones-seccion{
+  & .botones-seccion {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     padding-top: 7px;
   }
 
-  & .eliminar-usuario{
+  & .eliminar-usuario {
     display: flex;
     justify-content: center;
     margin-top: 7px;
 
     & .example-form-field {
       width: 200px;
-     color: white;
+      color: white;
     }
-    
-    & input {color: white;}
-    
+
+    & input {
+      color: white;
+    }
   }
 
-  .panel-admin-listar{
+  .panel-admin-listar {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    
-  
+    flex-direction: column;
+
     & .usuarios-panel {
-      
-      & mat-card{
+      display: grid;
+      grid-template-columns: repeat(5, 4fr);
+      overflow-x: inherit;
+      & mat-card {
         margin: 4px;
-        
       }
     }
 
     & .pedidos-panel {
-      
-      & mat-card{
+      display: grid;
+      grid-template-columns: repeat(4, 4fr);
+      overflow-x: inherit;
+      & mat-card {
         margin: 4px;
-        
       }
     }
+    .total {
+      display: flex;
+      justify-content: flex-start;
+      text-align: right;
+      color: rgb(110, 240, 196);
+    }
   }
-  
-
-
 }
-
