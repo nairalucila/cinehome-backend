@@ -1,15 +1,19 @@
 <div class="admin-container">
     <!-- BOTONES -->
     <div class="botones-seccion">
-        <button mat-raised-button color="warn" (click)="traerListaUsuarios()">Listar Usuarios</button>
-        <button mat-raised-button color="danger" (click)="mostrarInput()">Eliminar Usuario</button>
-    </div>
-    <!-- BORRAR USUARIOS -->
-    <div class="panel-admin">
-        <mat-form-field class="example-form-field" appearance="fill" *ngIf="esInputVisible">
-            <mat-label>Eliminar Usuario</mat-label>
+        <button mat-raised-button color="basic" (click)="traerListaUsuarios()">Listar Usuarios</button>
+        <button mat-raised-button color="warn" (click)="mostrarInput()">Eliminar Usuario</button>
 
-            <input matInput type="text" [formControl]="idForDelete">
+        <!-- Listar productos -->
+        <button mat-raised-button color="danger" (click)="traerTodosLosPedidos()">Listar Productos</button>
+    </div>
+
+    <!-- BORRAR USUARIOS -->
+    <div class="eliminar-usuario">
+        <mat-form-field class="example-form-field" appearance="outline" *ngIf="esInputVisible">
+            <mat-label style="color:white">Ingrese ID Usuario</mat-label>
+
+            <input matInput type="text" color="accent" [formControl]="idForDelete">
 
             <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="sendValue(idForDelete)">
                 <mat-icon>
@@ -18,16 +22,39 @@
             </button>
         </mat-form-field>
     </div>
+
     <!-- PANEL -->
-    <div *ngFor=" let usuario of listaUsuarios">
-        <!-- mini card -->
-        <mat-card class="mini-card-admin">
-            <div class="titulo-usuarios">
-                <h4>ID: {{usuario._id}}</h4>
-                <h2>{{usuario.nombreUsuario}}</h2>
+    <div class="panel-admin-listar">
+
+        <!-- TRAER TODOS LOS USUARIOS -->
+        <div class="usuarios-panel">
+            <div *ngFor=" let usuario of listaUsuarios">
+                <!-- mini card -->
+                <mat-card class="mini-card-admin">
+                    <div class="titulo-usuarios">
+                        <h4>ID: {{usuario._id}}</h4>
+                        <h2>{{usuario.nombreUsuario}}</h2>
+                    </div>
+                    <h3>{{usuario.email}}</h3>
+                    <h3>{{usuario.telefono}}</h3>
+                </mat-card>
             </div>
-            <h3>{{usuario.email}}</h3>
-            <h3>{{usuario.telefono}}</h3>
-        </mat-card>
+        </div>
+        <!-- TRAER TODOS PEDIDOS -->
+
+        <div class="pedidos-panel">
+        <div *ngFor=" let pedido of listaPedidos">
+            <!-- mini card -->
+            <mat-card class="mini-card-admin">
+                <div class="titulo-usuarios">
+                    <h4>ID: {{pedido._id}}</h4>
+                    <h3>{{pedido.titulo}}</h3>
+                    <h2>$ {{pedido.precio}}</h2>
+                </div>
+
+            </mat-card>
+        </div>
+
+
     </div>
 </div>

@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import {Pedido} from '../models/pedidos';
 
-// export interface Pedido {
-//   titulo: string;
-//   precio: number;
-//   idUsuario: string;
-//   _id?: string;
-// }
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +18,7 @@ export class PedidosService {
   //APIS CON NUEVA URL
 
   traerTodosPedidos(){
-    let apiUrlPedidos = this.apiUrlBack + "/api/pedidos";
+    let apiUrlPedidos = this.apiUrlBack + "api/pedidos";
     return this.http.get<Pedido[]>(apiUrlPedidos);  
   }
 

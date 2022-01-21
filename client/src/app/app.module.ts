@@ -25,8 +25,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminComponent } from './componentes/admin/admin.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { HeaderInterceptorService } from './interceptores/header-interceptor.service';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { HeaderInterceptorService } from './interceptores/header-interceptor.ser
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatBadgeModule
   ],
   providers: [
     CookieService,

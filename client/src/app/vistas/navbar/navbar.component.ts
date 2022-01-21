@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -10,15 +11,29 @@ import { ActivatedRoute, Router, ParamMap, ActivatedRouteSnapshot, NavigationEnd
 export class NavbarComponent implements OnInit {
   mostrarNav: boolean;
   currentRoute: string = "";
-  constructor(private route: Router) {
+  hayProductos: boolean;
+  esAdmin: boolean;
+
+  constructor(private route: Router, private cookie: CookieService) {
     this.mostrarNav = true;
+    this.hayProductos = false;
+    this.esAdmin = false;
+
   }
 
   ngOnInit(): void {
     this.ocultarBarraNavegacion();
-
+    this.irPanelAdmin();
     
   }
+
+  irPanelAdmin(){
+    let rol = this.cookie.get('rol');
+
+    if(rol === "ADMIN"){
+      this.esAdmin = true;
+    }
+   }
 
   ocultarBarraNavegacion(){
     // this.route.config.forEach(rutas => {

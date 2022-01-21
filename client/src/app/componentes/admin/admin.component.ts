@@ -26,11 +26,13 @@ export class AdminComponent implements OnInit {
     this.esInputVisible = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log("jdfhjskkfkfh")
+  }
 
   traerListaUsuarios() {
     this.usuarioService.traerUsuarios().subscribe((usuarios: Usuarios[]) => {
-      console.log(usuarios);
+     
       this.listaUsuarios = usuarios;
 
       for (let i = 0; i < usuarios.length; i++) {
@@ -39,9 +41,10 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  traerTodosPedidos() {
+  traerTodosLosPedidos() {
     this.pedidoService.traerTodosPedidos().subscribe((pedidos: Pedido[]) => {
-      console.log(pedidos);
+      this.listaPedidos = pedidos;
+      return this.listaPedidos;
     });
   }
 

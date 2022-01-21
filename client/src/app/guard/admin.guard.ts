@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
-  constructor(private cookie: CookieService) {}
+  constructor(private cookie: CookieService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
