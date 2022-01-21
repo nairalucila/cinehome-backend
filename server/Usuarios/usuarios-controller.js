@@ -1,4 +1,4 @@
-const Usuario = require("./models").Usuario;
+const Usuario = require("./models").Usuarios;
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const express = require("express");
@@ -8,12 +8,21 @@ const app = express();
 const registrarUsuario = async function (req, res) {
   try {
     let nuevoUsuario = new Usuario(req.body);
-    await nuevoUsuario.save();
-    return res.status(200).send("Usuario registrado con éxito");
+    let exist = await Usuario.findOne({ email: nuevoUsuario.email });
+
+    if (exist) {
+      return res.status(400).send("[Error]: Usuario registrado, porfavor inicie sesión");
+    } else {
+      await nuevoUsuario.save();
+      return res.status(200).send("Usuario registrado con éxito");
+    }
   } catch (error) {
-    return res
-      .status(400)
-      .send({ error: error, mensaje: "Hubo un problema con su petición" });
+    console.log(error);
+    return res.status(400).send({
+      error: error,
+      mensaje: error.message,
+      aviso: "Hubo un error en su peticion",
+    });
   }
 };
 
@@ -26,16 +35,18 @@ const verificarUsuario = async function (req, res) {
     });
 
     usuarioEntrante = {
+      _id: result._id,
       email: result.email,
       contrasenia: result.contrasenia,
-      rol: result.rol
-    }
+      rol: result.rol,
+    };
 
     if (result) {
       jwt.sign({ usuario: usuarioEntrante }, config.llave, (err, token) => {
         return res.json({
           token,
-          role: usuarioEntrante.rol
+          role: usuarioEntrante.rol,
+          _id: usuarioEntrante._id,
         });
       });
     } else {
@@ -63,7 +74,7 @@ const traerUsuarios = async function (req, res) {
 const eliminarUsuario = async function (req, res) {
   try {
     let usuarioId = req.params.id;
-    let usuarioEliminado = await Usuario.deleteOne({ id: usuarioId });
+    let usuarioEliminado = await Usuario.deleteOne({ _id: usuarioId });
 
     return res
       .status(200)

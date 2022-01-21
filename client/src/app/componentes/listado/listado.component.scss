@@ -1,0 +1,109 @@
+.titulo-listado-principal {
+  z-index: 1000;
+  margin: auto;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  font-size: 100px;
+  color: white
+}
+
+.contenedor-listado {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: rgb(26, 24, 31);
+  overflow-x: inherit;
+}
+
+.imagen-peli{
+  cursor:pointer;
+}
+
+.color-boton-listado{
+  background-color:#af1fcf;
+  color: white;
+}
+
+.contenedor-secundario {
+  margin: 1rem;
+}
+
+.mat-card {
+  max-width: 400px;
+  //background-color:#777d8f;
+}
+
+.card-title {
+  font-size: 19px;
+  margin-bottom: 1rem;
+}
+
+.precio-pelicula {
+  font-size: 18px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.stock-pelicula {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+}
+
+.organizar-contenedor{
+  display: flex;
+ // flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  mat-card-content{
+    margin-top: 1rem;
+  }
+  & h5{
+    font-size: 12px;
+    margin-right: 5px;
+    color: rgb(49, 45, 53);
+  }
+}
+
+.contenedor-stock-precio {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(49, 51, 66);
+}
+
+
+
+@media (max-width: 600px) {
+  .contenedor-listado {
+    display: unset;
+    grid-template-columns: repeat(1, 1fr);
+    background-color: unset;
+    height: unset;
+    overflow-x: hidden;
+  }
+
+  .contenedor-secundario {
+    margin: 0.7rem;
+  }
+  // .organizar-contenedor{
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+
+  //   mat-card-content{
+  //     position: relative;
+  //     top: 0.5rem;
+  //   }
+  // }
+
+  .mat-card {
+    max-width: 300px;
+    //background-color:#777d8f;
+  }
+
+  .titulo-listado-principal {
+    font-size: 25px;
+    top: 18%;
+  }
+}

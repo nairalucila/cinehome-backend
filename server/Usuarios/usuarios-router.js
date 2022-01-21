@@ -3,8 +3,8 @@ const route = Router();
 const {registrarUsuario, traerUsuarios, eliminarUsuario, verificarUsuario } = require('./usuarios-controller');
 const autorizacion = require('../middleware');
 
-route.get('/api/usuarios', autorizacion, traerUsuarios  ); 
-route.delete('/api/usuarios/:id', autorizacion, eliminarUsuario); 
+route.get('/api/usuarios', traerUsuarios  ); //falta autorizacion
+route.delete('/api/usuarios/:id', eliminarUsuario); 
 
 route.post('/login', verificarUsuario );
 

@@ -6,8 +6,8 @@ mongoose.Promise = global.Promise
 const pedidoSchema = new Schema({
     titulo: String,
     precio: Number,
-    idUsuario: Number,
-    id: Number
+    idUsuario: String,
+
 });
 
 module.exports = mongoose.model('Pedido', pedidoSchema);

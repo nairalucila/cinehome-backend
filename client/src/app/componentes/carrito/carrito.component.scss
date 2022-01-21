@@ -1,0 +1,41 @@
+.contenedor-carrito{
+  background-color: #CFB7D2;
+  height: 100%;
+}
+
+table {
+    width: 80%;
+    margin: auto;
+    margin-top: 2rem;
+  }
+  
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+
+  .titulo-carrito{
+    padding-top: 4rem;
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .tabla-carrito{
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+  }
+  .placeholder-cantidad{
+    width: 50px;
+  }
+
+  @media (max-width: 600px) {
+    table {
+      width: 88%;
+    }
+    .tabla-carrito{
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+    }
+    .placeholder-cantidad{
+      width: 25px;
+    }
+  }
