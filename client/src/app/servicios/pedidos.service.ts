@@ -38,6 +38,11 @@ export class PedidosService {
     return this.http.delete<Pedido>(apiUrlPedidos);
   }
 
+  eliminarTodosLosPedidos(idUsuario: string){
+    let apiUrlPedidos = this.apiUrlBack + "usuario/pedidos/" + idUsuario;
+    return this.http.delete<Pedido>(apiUrlPedidos);
+  }
+
   //APIS CON VIEJA URL
 
   // traerPedidosBaseDatos2(idUsuario: number) {

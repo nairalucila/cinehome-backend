@@ -10,12 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Pedido } from 'src/app/models/pedidos';
 
-// interface PeliculaSeleccionada {
-//   titulo: string;
-//   precio: number;
-//   idUsuario: string | null;
-//   id?: number;
-// }
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -33,18 +27,18 @@ export class CarritoComponent implements OnInit, OnChanges {
     private route: Router
   ) {
     this.producto = {};
-    const idlocalstorage = localStorage.getItem('INITIALIZACION_IN')
-    if(!idlocalstorage) {
+    const idlocalstorage = localStorage.getItem('INITIALIZACION_IN');
+    if (!idlocalstorage) {
       this.route.navigate(['/login']);
-      throw new Error('No se encuentra id')
+      throw new Error('No se encuentra id');
     }
-    this.idUsuario = idlocalstorage ;
+    this.idUsuario = idlocalstorage;
   }
 
   ngOnInit(): void {
     this.traerPedidosBaseDatos();
   }
- 
+
   obtenerMontoTotal() {
     return this.productoSeleccionados
       .map((peli) => peli.precio)
@@ -59,16 +53,22 @@ export class CarritoComponent implements OnInit, OnChanges {
       });
   }
 
+  eliminarTodo(todosProductos: any) {
+     this.pedidoService.eliminarTodosLosPedidos(this.idUsuario).subscribe((res) => {
+       debugger
+      console.log('ACTUAL-->', res);
+      
+    });
+  }
+
   ngOnChanges(changes: SimpleChanges) {}
 
   eliminarPelicula(productoSelec: any) {
-    
     this.pedidoService.eliminarPedido(productoSelec._id).subscribe((info) => {
-            
       this.productoSeleccionados = this.productoSeleccionados.filter((p) => {
-                return p._id !== productoSelec._id;
+        return p._id !== productoSelec._id;
       });
-            this._snackBar.open("Pedido eliminado con éxito", "", {duration: 1000});
+      this._snackBar.open('Pedido eliminado con éxito', '', { duration: 1000 });
     });
   }
 }

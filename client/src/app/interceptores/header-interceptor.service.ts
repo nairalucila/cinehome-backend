@@ -34,6 +34,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
 
     const headers = new HttpHeaders({
       'authorization': this.token,
+      'content-type' : 'application/json'
     });
 
     const reqClone = req.clone({

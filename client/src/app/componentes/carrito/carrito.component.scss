@@ -27,6 +27,18 @@ table {
     width: 50px;
   }
 
+  .botones-pagar-restart{
+    //display: flex;
+    width: 80%;
+    margin: auto;
+     
+    & button {
+      margin-right: 1rem;
+    }
+    
+
+  }
+
   @media (max-width: 600px) {
     table {
       width: 88%;
