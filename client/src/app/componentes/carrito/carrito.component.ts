@@ -9,6 +9,8 @@ import { PedidosService } from 'src/app/servicios/pedidos.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Pedido } from 'src/app/models/pedidos';
+import { Store } from '@ngrx/store';
+import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
 
 @Component({
   selector: 'app-carrito',
@@ -21,10 +23,13 @@ export class CarritoComponent implements OnInit, OnChanges {
   producto: object;
   idUsuario: string;
 
+  pedidos$ = this.store.select(selectPedidos)
+
   constructor(
     private pedidoService: PedidosService,
     private _snackBar: MatSnackBar,
-    private route: Router
+    private route: Router,
+    private store: Store
   ) {
     this.producto = {};
     const idlocalstorage = localStorage.getItem('INITIALIZACION_IN');
@@ -37,6 +42,7 @@ export class CarritoComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.traerPedidosBaseDatos();
+    
   }
 
   obtenerMontoTotal() {

@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import {Pedido} from '../models/pedidos';
-
+import { tap } from 'rxjs/operators';
+import { Pedido } from '../models/pedidos';
+import { agregarPedido } from '../store/pedidos/pedidos.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -13,33 +15,38 @@ export class PedidosService {
 
   private pedidoEntrante = new Subject<Pedido[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
 
   //APIS CON NUEVA URL
 
-  traerTodosPedidos(){
-    let apiUrlPedidos = this.apiUrlBack + "api/pedidos";
-    return this.http.get<Pedido[]>(apiUrlPedidos);  
+  traerTodosPedidos() {
+    let apiUrlPedidos = this.apiUrlBack + 'api/pedidos';
+    return this.http.get<Pedido[]>(apiUrlPedidos);
   }
 
   registrarPedido(pedido: Pedido): Observable<Pedido> {
-    let apiUrlPedidos = this.apiUrlBack + "pedidos";
-    return this.http.post<Pedido>(apiUrlPedidos, pedido);
+    let apiUrlPedidos = this.apiUrlBack + 'pedidos';
+    return this.http.post<Pedido>(apiUrlPedidos, pedido).pipe(
+      tap((pedido) => {
+        console.log(pedido, "pedido agregado")
+        this.store.dispatch(agregarPedido(pedido));
+      })
+    );
   }
 
   traerPedidosBaseDatos(idUsuario: string) {
-    let apiUrlPedidos = this.apiUrlBack + "pedidos/" + idUsuario;
+    let apiUrlPedidos = this.apiUrlBack + 'pedidos/' + idUsuario;
 
     return this.http.get<Pedido[]>(apiUrlPedidos);
   }
 
   eliminarPedido(idPedido: string) {
-    let apiUrlPedidos = this.apiUrlBack + "pedidos/" + idPedido;
+    let apiUrlPedidos = this.apiUrlBack + 'pedidos/' + idPedido;
     return this.http.delete<Pedido>(apiUrlPedidos);
   }
 
-  eliminarTodosLosPedidos(idUsuario: string){
-    let apiUrlPedidos = this.apiUrlBack + "usuario/pedidos/" + idUsuario;
+  eliminarTodosLosPedidos(idUsuario: string) {
+    let apiUrlPedidos = this.apiUrlBack + 'usuario/pedidos/' + idUsuario;
     return this.http.delete<Pedido>(apiUrlPedidos);
   }
 
