@@ -87,7 +87,6 @@ export class ListadoComponent implements OnInit, OnChanges {
       precio: precio,
       idUsuario: this.idRegistroUsuario,
     };
-
     this.pedidoService
       .registrarPedido(this.nuevoPedido)
       .subscribe((pedido: Pedido) => {
@@ -95,6 +94,13 @@ export class ListadoComponent implements OnInit, OnChanges {
           this._snackBar.open('Película agregada con éxito', '', {
             duration: 1000,
           });
+          
+          this.listaPeliculas = this.listaPeliculas.map(p => {
+            if (p.original_title === pelicula && p.stock) {
+              p.stock--;
+            }
+            return p;
+          })
         } else {
           this._snackBar.open('Error al agregar Película', '', {
             duration: 1000,
