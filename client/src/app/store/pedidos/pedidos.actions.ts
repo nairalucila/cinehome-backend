@@ -35,4 +35,5 @@ export const inicializarListaPedidos = createAction(
   '[Pedidos service] Inicializar la lista de Pedidos',
   props<{pedidos: Pedido[]}>()
 )
+
 //este pedidos: Pedido[] lo desestructura en reducer
