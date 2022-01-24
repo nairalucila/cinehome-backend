@@ -6,8 +6,8 @@ require("./models");
 const registrarPedido = async function (req, res) {
   try {
     let nuevoPedido = new Pedido(req.body);
-    await nuevoPedido.save();
-    return res.status(200).send("Pedido enviado con éxito");
+    const doc = await nuevoPedido.save();
+    return res.status(200).json(doc);
   } catch (error) {
     return res
       .status(400)
@@ -66,8 +66,8 @@ const traerTodosPedidos = async function (req, res) {
 const eliminarMuchosPedidos = async (req, res) => {
   try {
    
-    await Pedido.deleteMany({ idUsuario: req.params.id});
-    return res.status(200).send("Se eliminaron pedidos con éxito");
+    const data = await Pedido.deleteMany({ idUsuario: req.params.id});
+    return res.status(200).json(data);
 
   } catch (error) {
     return res
