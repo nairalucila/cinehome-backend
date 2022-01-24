@@ -38,7 +38,7 @@
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
   <div class="botones-pagar-restart">
-    <button mat-raised-button color="warn">Pagar</button>
+    <button mat-raised-button color="warn" (click)="pagar()">Pagar</button>
     <button mat-raised-button color="basic" (click)="eliminarTodo(productoSeleccionados)">Eliminar todo</button>
   </div>
 </div>

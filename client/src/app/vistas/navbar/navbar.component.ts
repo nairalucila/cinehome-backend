@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
+import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
 
 
 @Component({
@@ -14,7 +16,14 @@ export class NavbarComponent implements OnInit {
   hayProductos: boolean;
   esAdmin: boolean;
 
-  constructor(private route: Router, private cookie: CookieService) {
+  totalPedidos: number = 0
+
+
+  pedidos$ = this.store.select(selectPedidos)
+
+  constructor(private route: Router, private cookie: CookieService,
+    private store: Store
+    ) {
     this.mostrarNav = true;
     this.hayProductos = false;
     this.esAdmin = false;
@@ -24,7 +33,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.ocultarBarraNavegacion();
     this.irPanelAdmin();
-    
+    this.pedidos$.subscribe({
+      next: pedidos => {
+        this.totalPedidos = pedidos.length
+      }
+    })
   }
 
   irPanelAdmin(){
