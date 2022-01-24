@@ -31,6 +31,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { StoreModule } from '@ngrx/store';
 import { pedidosReducer } from './store/pedidos/pedidos.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { PagarCompraComponent } from './componentes/pagar-compra/pagar-compra.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     DetalleComponent,
     PerfilComponent,
     AdminComponent,
+    PagarCompraComponent,
   ],
   imports: [
     BrowserModule,

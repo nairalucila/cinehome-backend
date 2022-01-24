@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { Pedido } from 'src/app/models/pedidos';
 import { Store } from '@ngrx/store';
 import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
+import {MatDialog} from '@angular/material/dialog';
+import { PagarCompraComponent } from '../pagar-compra/pagar-compra.component';
 
 @Component({
   selector: 'app-carrito',
@@ -29,7 +31,8 @@ export class CarritoComponent implements OnInit, OnChanges {
     private pedidoService: PedidosService,
     private _snackBar: MatSnackBar,
     private route: Router,
-    private store: Store
+    private store: Store,
+    public dialog: MatDialog
   ) {
     this.producto = {};
     const idlocalstorage = localStorage.getItem('INITIALIZACION_IN');
@@ -65,12 +68,16 @@ export class CarritoComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {}
 
-  eliminarPelicula(productoSelec: any) {
+  eliminarPelicula(productoSelec: any){
     this.pedidoService.eliminarPedido(productoSelec._id).subscribe((info) => {
       this.productoSeleccionados = this.productoSeleccionados.filter((p) => {
         return p._id !== productoSelec._id;
       });
       this._snackBar.open('Pedido eliminado con éxito', '', { duration: 1000 });
     });
+  }
+
+  pagar():void{
+   this.dialog.open(PagarCompraComponent)
   }
 }
