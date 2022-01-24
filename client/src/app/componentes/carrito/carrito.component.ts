@@ -52,18 +52,14 @@ export class CarritoComponent implements OnInit, OnChanges {
   }
 
   traerPedidosBaseDatos() {
-    this.pedidoService
-      .traerPedidosBaseDatos(this.idUsuario)
-      .subscribe((pedidos: Pedido[]) => {
-        this.productoSeleccionados = pedidos;
+    this.pedidos$
+      .subscribe((pedidos) => {
+        this.productoSeleccionados = [...pedidos];
       });
   }
 
   eliminarTodo(todosProductos: any) {
      this.pedidoService.eliminarTodosLosPedidos(this.idUsuario).subscribe((res) => {
-       debugger
-      console.log('ACTUAL-->', res);
-      
     });
   }
 

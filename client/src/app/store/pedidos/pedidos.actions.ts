@@ -30,3 +30,9 @@ export const removerTodosPedidos = createAction(
   '[Pedidos service] Remover todos los pedidos',
   props<{idUsuario: string}>()
 )
+
+export const inicializarListaPedidos = createAction(
+  '[Pedidos service] Inicializar la lista de Pedidos',
+  props<{pedidos: Pedido[]}>()
+)
+//este pedidos: Pedido[] lo desestructura en reducer
