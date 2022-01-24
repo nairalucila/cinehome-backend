@@ -17,8 +17,6 @@ export class NavbarComponent implements OnInit {
   esAdmin: boolean;
 
   totalPedidos: number = 0
-
-
   pedidos$ = this.store.select(selectPedidos)
 
   constructor(private route: Router, private cookie: CookieService,
@@ -42,7 +40,6 @@ export class NavbarComponent implements OnInit {
 
   irPanelAdmin(){
     let rol = this.cookie.get('rol');
-
     if(rol === "ADMIN"){
       this.esAdmin = true;
     }

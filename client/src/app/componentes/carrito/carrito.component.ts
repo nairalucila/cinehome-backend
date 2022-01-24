@@ -45,6 +45,7 @@ export class CarritoComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.traerPedidosBaseDatos();
+    this.pedidoService.traerPedidosBaseDatos(this.idUsuario).subscribe()
     
   }
 

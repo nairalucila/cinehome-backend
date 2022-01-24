@@ -11,7 +11,7 @@ const registrarPedido = async function (req, res) {
   } catch (error) {
     return res
       .status(400)
-      .send({ error: error, mensaje: "Hubo un problema con su petición" });
+      .json({ error: error, mensaje: "Hubo un problema con su petición" });
   }
 };
 

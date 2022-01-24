@@ -1,8 +1,8 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { PedidosService} from 'src/app/servicios/pedidos.service';
-import {Pedido} from '../../models/pedidos';
+import { PedidosService } from 'src/app/servicios/pedidos.service';
+import { Pedido } from '../../models/pedidos';
 import { PeliculasService } from 'src/app/servicios/peliculas.service';
 import {
   Genero,
@@ -10,6 +10,9 @@ import {
   Peliculas,
 } from '../../models/peliculas';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
+import { selectStock } from 'src/app/store/stock/stock.selection';
 
 @Component({
   selector: 'app-listado',
@@ -29,12 +32,15 @@ export class ListadoComponent implements OnInit, OnChanges {
   img_url: string = 'https://image.tmdb.org/t/p/w500';
 
   idRegistroUsuario: string;
+  pedidos$ = this.store.select(selectPedidos);
+  stock$ = this.store.select(selectStock);
 
   constructor(
     private router: Router,
     private pedidoService: PedidosService,
     private peliculaService: PeliculasService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private store: Store
   ) {
     this.seAgrego = true;
     this.animacionCheck = false;
@@ -75,6 +81,13 @@ export class ListadoComponent implements OnInit, OnChanges {
     }
   }
 
+  modificarStock() {
+
+    this.stock$.subscribe((data)=>{
+      console.log(data, "DATA EN LISTADO")
+    })
+  }
+
   ngOnChanges(changes: SimpleChanges): void {}
 
   detallePelicula(id: number) {
@@ -108,5 +121,6 @@ export class ListadoComponent implements OnInit, OnChanges {
         }
       });
 
+      this.modificarStock()
   }
 }
