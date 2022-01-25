@@ -42,18 +42,19 @@ const verificarUsuario = async function (req, res) {
     };
 
     if (result) {
-      jwt.sign({ usuario: usuarioEntrante }, config.llave, { expiresIn: "1h" }, (err, token) => {
+      jwt.sign({ usuario: usuarioEntrante}, config.llave, { expiresIn: "1h" }, (err, token) => {
         return res.json({
           token,
           role: usuarioEntrante.rol,
           _id: usuarioEntrante._id,
+          
         });
       });
     } else {
       res.json({ mensaje: "Usuario o contraseña incorrectos" });
     }
   } catch (error) {
-    return res.status(400).send({
+    return res.status(400).json({
       error: error,
       mensaje: "No pudo ingresar al sistema, revise alguno de sus datos",
     });
