@@ -11,10 +11,10 @@ const registrarUsuario = async function (req, res) {
     let exist = await Usuario.findOne({ email: nuevoUsuario.email });
 
     if (exist) {
-      return res.status(400).send("[Error]: Usuario registrado, porfavor inicie sesión");
+      return res.status(400).json(exist);
     } else {
       await nuevoUsuario.save();
-      return res.status(200).send("Usuario registrado con éxito");
+      return res.status(200).json(nuevoUsuario);
     }
   } catch (error) {
     console.log(error);
@@ -42,7 +42,7 @@ const verificarUsuario = async function (req, res) {
     };
 
     if (result) {
-      jwt.sign({ usuario: usuarioEntrante }, config.llave, (err, token) => {
+      jwt.sign({ usuario: usuarioEntrante }, config.llave, { expiresIn: "1h" }, (err, token) => {
         return res.json({
           token,
           role: usuarioEntrante.rol,

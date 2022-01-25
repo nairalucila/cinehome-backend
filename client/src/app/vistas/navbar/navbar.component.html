@@ -24,7 +24,7 @@
   </div>
 
   <div class="boton-carrito">
-    <button mat-mini-fab matBadge="4" matBadgeColor="warn" routerLink="/carrito">
+    <button mat-mini-fab  [matBadge]="totalPedidos" [matBadgeHidden]="totalPedidos == 0 ? true : false" matBadgeColor="warn" routerLink="/carrito">
 
       <mat-icon>shopping_cart</mat-icon>
 

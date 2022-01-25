@@ -6,12 +6,12 @@ require("./models");
 const registrarPedido = async function (req, res) {
   try {
     let nuevoPedido = new Pedido(req.body);
-    await nuevoPedido.save();
-    return res.status(200).send("Pedido enviado con éxito");
+    const doc = await nuevoPedido.save();
+    return res.status(200).json(doc);
   } catch (error) {
     return res
       .status(400)
-      .send({ error: error, mensaje: "Hubo un problema con su petición" });
+      .json({ error: error, mensaje: "Hubo un problema con su petición" });
   }
 };
 
@@ -23,12 +23,12 @@ const traerPedidoBaseDatos = async function (req, res) {
     if (pedidosOnDB) {
       return res.status(200).json(pedidosOnDB);
     } else {
-      return res.status(200).send("No hay pedidos hechos por el usuario");
+      return res.status(400).json({mensaje: "No hay pedidos hechos por el usuario"});
     }
   } catch (error) {
     return res
-      .status(400)
-      .send({ error: error, mensaje: "Hubo un problema con su petición" });
+      .status(500)
+      .json({ error: error, mensaje: "Hubo un problema con su petición" });
   }
 };
 
@@ -66,8 +66,8 @@ const traerTodosPedidos = async function (req, res) {
 const eliminarMuchosPedidos = async (req, res) => {
   try {
    
-    await Pedido.deleteMany({ idUsuario: req.params.id});
-    return res.status(200).send("Se eliminaron pedidos con éxito");
+    const data = await Pedido.deleteMany({ idUsuario: req.params.id});
+    return res.status(200).json(data);
 
   } catch (error) {
     return res

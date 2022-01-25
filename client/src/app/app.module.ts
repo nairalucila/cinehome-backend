@@ -28,7 +28,11 @@ import { AdminComponent } from './componentes/admin/admin.component';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { HeaderInterceptorService } from './interceptores/header-interceptor.service';
 import {MatBadgeModule} from '@angular/material/badge';
-
+import { StoreModule } from '@ngrx/store';
+import { pedidosReducer } from './store/pedidos/pedidos.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { PagarCompraComponent } from './componentes/pagar-compra/pagar-compra.component';
+import { stockReducer } from './store/stock/stock.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +45,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     DetalleComponent,
     PerfilComponent,
     AdminComponent,
+    PagarCompraComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,15 @@ import {MatBadgeModule} from '@angular/material/badge';
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    StoreModule.forRoot({ pedidos: pedidosReducer,
+    stock: stockReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: false,
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
+    
   ],
   providers: [
     CookieService,

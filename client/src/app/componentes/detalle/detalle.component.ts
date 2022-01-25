@@ -4,6 +4,10 @@ import { PeliculasService } from 'src/app/servicios/peliculas.service';
 import { Genero, Peliculas, Detalles } from '../../models/peliculas';
 import { PedidosService } from 'src/app/servicios/pedidos.service';
 import { Pedido } from 'src/app/models/pedidos';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
+import { selectStock } from 'src/app/store/stock/stock.selection';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-detalle',
@@ -20,19 +24,21 @@ export class DetalleComponent implements OnInit {
   listaPeliculasRecomendas: Peliculas[] = [];
   idUsuario: string;
 
-  
+  pedidos$ = this.store.select(selectPedidos);
+  stock$ = this.store.select(selectStock);
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private peliculaService: PeliculasService,
-    private pedidoService: PedidosService
+    private pedidoService: PedidosService,
+    private snackBar: MatSnackBar,
+    private store: Store
   ) {
-
     const idlocalstorage = localStorage.getItem('INITIALIZACION_IN');
-    if(!idlocalstorage) {
+    if (!idlocalstorage) {
       this.router.navigate(['/login']);
-      throw new Error('No se encuentra id')
+      throw new Error('No se encuentra id');
     }
     this.idUsuario = idlocalstorage;
 
@@ -42,7 +48,7 @@ export class DetalleComponent implements OnInit {
       poster_path: 'img/jpg',
       vote_average: 0,
     };
-    
+
     this.nuevoPedido = {
       titulo: '',
       precio: 0,
@@ -79,9 +85,20 @@ export class DetalleComponent implements OnInit {
   obtenerRecomendadas() {
     this.id.toString();
     this.peliculaService.obtenerRelacionadas(this.id).subscribe((peliculas) => {
-      console.log('RECOMENDADAS', peliculas);
+      peliculas.results.map((p: Peliculas) => {
+        return this.listaPeliculasRecomendas.push({
+          id: p.id,
+          original_title: p.original_title,
+          vote_average: p.vote_average,
+          poster_path: p.poster_path,
+          genre_ids: p.genre_ids,
+          vote_count: p.vote_count,
+          precio: p.vote_count > 1000 ? 1270 : 965,
+          stock: 100,
+        });
+      });
 
-      this.listaPeliculasRecomendas = peliculas.results;
+      this.listaPeliculasRecomendas = [...this.listaPeliculasRecomendas];
     });
   }
 
@@ -92,11 +109,37 @@ export class DetalleComponent implements OnInit {
       precio: precio,
       idUsuario: this.idUsuario,
     };
-  };
 
-  //REVISAR
+    this.pedidoService
+      .registrarPedido(this.nuevoPedido)
+      .subscribe((pedido: Pedido) => {
+        if (pedido) {
+          this.snackBar.open('Película agregada con éxito', '', {
+            duration: 1000,
+          });
+
+          this.listaPeliculasRecomendas = this.listaPeliculasRecomendas.map(
+            (p) => {
+              if (p.original_title === pelicula && p.stock) {
+                p.stock--;
+              }
+              return p;
+            }
+          );
+        } else {
+          this.snackBar.open('Error al agregar Película', '', {
+            duration: 1000,
+          });
+        }
+      });
+  }
+
   detallePelicula(id: number) {
     this.idDetalle = id;
-    this.router.navigate(['/detalle', { id: this.idDetalle }]);
+    this.router
+      .navigateByUrl('/home', { skipLocationChange: true })
+      .then(() => {
+        this.router.navigate(['/detalle', { id: this.idDetalle }]);
+      });
   }
 }

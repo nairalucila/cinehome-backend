@@ -9,6 +9,10 @@ import { PedidosService } from 'src/app/servicios/pedidos.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Pedido } from 'src/app/models/pedidos';
+import { Store } from '@ngrx/store';
+import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
+import {MatDialog} from '@angular/material/dialog';
+import { PagarCompraComponent } from '../pagar-compra/pagar-compra.component';
 
 @Component({
   selector: 'app-carrito',
@@ -21,10 +25,14 @@ export class CarritoComponent implements OnInit, OnChanges {
   producto: object;
   idUsuario: string;
 
+  pedidos$ = this.store.select(selectPedidos)
+
   constructor(
     private pedidoService: PedidosService,
     private _snackBar: MatSnackBar,
-    private route: Router
+    private route: Router,
+    private store: Store,
+    public dialog: MatDialog
   ) {
     this.producto = {};
     const idlocalstorage = localStorage.getItem('INITIALIZACION_IN');
@@ -37,6 +45,8 @@ export class CarritoComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.traerPedidosBaseDatos();
+    this.pedidoService.traerPedidosBaseDatos(this.idUsuario).subscribe()
+    
   }
 
   obtenerMontoTotal() {
@@ -46,29 +56,29 @@ export class CarritoComponent implements OnInit, OnChanges {
   }
 
   traerPedidosBaseDatos() {
-    this.pedidoService
-      .traerPedidosBaseDatos(this.idUsuario)
-      .subscribe((pedidos: Pedido[]) => {
-        this.productoSeleccionados = pedidos;
+    this.pedidos$
+      .subscribe((pedidos) => {
+        this.productoSeleccionados = [...pedidos];
       });
   }
 
   eliminarTodo(todosProductos: any) {
      this.pedidoService.eliminarTodosLosPedidos(this.idUsuario).subscribe((res) => {
-       debugger
-      console.log('ACTUAL-->', res);
-      
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {}
 
-  eliminarPelicula(productoSelec: any) {
+  eliminarPelicula(productoSelec: any){
     this.pedidoService.eliminarPedido(productoSelec._id).subscribe((info) => {
       this.productoSeleccionados = this.productoSeleccionados.filter((p) => {
         return p._id !== productoSelec._id;
       });
       this._snackBar.open('Pedido eliminado con éxito', '', { duration: 1000 });
     });
+  }
+
+  pagar():void{
+   this.dialog.open(PagarCompraComponent)
   }
 }
