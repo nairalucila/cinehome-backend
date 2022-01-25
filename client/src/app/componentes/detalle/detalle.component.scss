@@ -1,14 +1,14 @@
 .contenedor-detalle {
-    background-color: rgb(26, 24, 31);
-    height: 100%;
-    overflow-x: inherit;
+  background-color: rgb(26, 24, 31);
+  height: 100%;
+  overflow-x: inherit;
 }
 
-.contenedor-interno{
-    display: flex;
-    
-    border: 2px solid white;
-    justify-content: space-between;
+.contenedor-interno {
+  display: flex;
+
+  border: 2px solid white;
+  justify-content: space-between;
 }
 
 .contenedor-desarrollo {
@@ -49,37 +49,37 @@
 }
 
 //RECOMENDADOS
-.contenedor-recomendado{
+.contenedor-recomendado {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background-color: rgb(26, 24, 31);
   overflow-x: inherit;
 }
 
-.titulo-recomendadas{
+.titulo-recomendadas {
   display: block;
   text-align: center;
-  
+
   margin-top: 2rem;
 
-  & h1{
+  & h1 {
     font-size: 38px;
     font-weight: 400;
     color: whitesmoke;
   }
 
-  & h3{
+  & h3 {
     font-size: 20px;
     font-weight: 400;
     color: rgb(237, 223, 253);
   }
 }
-.contenedor-secundario{
+.contenedor-secundario {
   margin: 1rem;
 }
 
-.imagen-peli{
-  cursor:pointer;
+.imagen-peli {
+  cursor: pointer;
 }
 
 .mat-card {
@@ -92,16 +92,15 @@
   margin-bottom: 1rem;
 }
 
+.contenedor-stock-precio {
+  display: flex;
+  justify-content: space-between;
+}
+
 .precio-pelicula {
   font-size: 18px;
   text-align: right;
   font-weight: 600;
-}
-
-.stock-pelicula {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 200;
-  font-size: 16px;
 }
 
 
@@ -110,20 +109,29 @@
   margin: 16px 0px 0px 16px;
 }
 
+.organizar-contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.color-boton-listado {
+  background-color: #af1fcf;
+  color: white;
+}
 
- .back{
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
+.back {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
 
-    & h3{
-        font-size: 18px;
-        color: aliceblue;
-        margin-left: 3px;
-    }
-    & mat-icon {
-        color: aquamarine;
-        margin-left: 3px;
-    }
+  & h3 {
+    font-size: 18px;
+    color: aliceblue;
+    margin-left: 3px;
+  }
+  & mat-icon {
+    color: aquamarine;
+    margin-left: 3px;
+  }
 }

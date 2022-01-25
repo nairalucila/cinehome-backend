@@ -33,7 +33,6 @@ export class ListadoComponent implements OnInit, OnChanges {
 
   idRegistroUsuario: string;
   pedidos$ = this.store.select(selectPedidos);
-  stock$ = this.store.select(selectStock);
 
   constructor(
     private router: Router,
@@ -81,13 +80,6 @@ export class ListadoComponent implements OnInit, OnChanges {
     }
   }
 
-  modificarStock() {
-
-    this.stock$.subscribe((data)=>{
-      console.log(data, "DATA EN LISTADO")
-    })
-  }
-
   ngOnChanges(changes: SimpleChanges): void {}
 
   detallePelicula(id: number) {
@@ -121,6 +113,6 @@ export class ListadoComponent implements OnInit, OnChanges {
         }
       });
 
-      this.modificarStock()
+    
   }
 }
