@@ -20,19 +20,16 @@ export class DetalleComponent implements OnInit {
   listaPeliculasRecomendas: Peliculas[] = [];
   idUsuario: string;
 
-  
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private peliculaService: PeliculasService,
     private pedidoService: PedidosService
   ) {
-
     const idlocalstorage = localStorage.getItem('INITIALIZACION_IN');
-    if(!idlocalstorage) {
+    if (!idlocalstorage) {
       this.router.navigate(['/login']);
-      throw new Error('No se encuentra id')
+      throw new Error('No se encuentra id');
     }
     this.idUsuario = idlocalstorage;
 
@@ -42,7 +39,7 @@ export class DetalleComponent implements OnInit {
       poster_path: 'img/jpg',
       vote_average: 0,
     };
-    
+
     this.nuevoPedido = {
       titulo: '',
       precio: 0,
@@ -79,9 +76,22 @@ export class DetalleComponent implements OnInit {
   obtenerRecomendadas() {
     this.id.toString();
     this.peliculaService.obtenerRelacionadas(this.id).subscribe((peliculas) => {
-      console.log('RECOMENDADAS', peliculas);
 
-      this.listaPeliculasRecomendas = peliculas.results;
+      peliculas.results.map((p: Peliculas)=>{
+       return this.listaPeliculasRecomendas.push({
+          id: p.id,
+          original_title: p.original_title,
+          vote_average: p.vote_average,
+          poster_path: p.poster_path,
+          genre_ids: p.genre_ids,
+          vote_count: p.vote_count,
+          precio: p.vote_count > 1000 ? 1270 : 965,
+          stock: 100,
+        });
+      })
+      
+      this.listaPeliculasRecomendas = [...this.listaPeliculasRecomendas]
+      
     });
   }
 
@@ -92,11 +102,13 @@ export class DetalleComponent implements OnInit {
       precio: precio,
       idUsuario: this.idUsuario,
     };
-  };
+  }
 
   //REVISAR
   detallePelicula(id: number) {
     this.idDetalle = id;
-    this.router.navigate(['/detalle', { id: this.idDetalle }]);
+    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(()=>{
+      this.router.navigate(['/detalle', { id: this.idDetalle }]);
+    })
   }
 }
