@@ -23,12 +23,12 @@ const traerPedidoBaseDatos = async function (req, res) {
     if (pedidosOnDB) {
       return res.status(200).json(pedidosOnDB);
     } else {
-      return res.status(200).send("No hay pedidos hechos por el usuario");
+      return res.status(400).json({mensaje: "No hay pedidos hechos por el usuario"});
     }
   } catch (error) {
     return res
-      .status(400)
-      .send({ error: error, mensaje: "Hubo un problema con su petición" });
+      .status(500)
+      .json({ error: error, mensaje: "Hubo un problema con su petición" });
   }
 };
 
