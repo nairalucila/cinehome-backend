@@ -132,16 +132,7 @@ export class DetalleComponent implements OnInit {
           });
         }
       });
-
-    this.modificarStock();
   }
-  
-  modificarStock() {
-    this.stock$.subscribe((data) => {
-      console.log(data, 'DATA EN LISTADO');
-    });
-  }
-  
 
   detallePelicula(id: number) {
     this.idDetalle = id;
