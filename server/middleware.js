@@ -46,7 +46,28 @@ function autorizacionClientes(req, res, next) {
   }
 }
 
+const generarNuevoToken = async (req, res) => {
+  try {
+    const usuarioEntrante = req.body;
+
+    jwt.sign(
+      { usuario: usuarioEntrante },
+      llave,
+      { expiresIn: "1h" },
+      (err, token) => {
+        return res.json({
+          token,
+          role: usuarioEntrante.rol,
+        });
+      }
+    );
+  } catch (error) {
+    return res.status(401).json({ mensaje: "[No autorizado]", error: error });
+  }
+};
+
 module.exports = {
   autorizacion,
   autorizacionClientes,
+  generarNuevoToken,
 };
