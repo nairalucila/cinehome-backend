@@ -11,8 +11,4 @@ route.delete('/api/usuarios/:id', autorizacion, eliminarUsuario);
 route.post('/login', verificarUsuario );
 route.post('/usuarios', registrarUsuario );
 
-//RUTA AL PEDO ME PARECE
-route.post('/refresh', refreshToken);
-
-
 module.exports = route;
