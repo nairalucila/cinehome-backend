@@ -1,7 +1,7 @@
 const {Router} = require('express'); 
 const route = Router();
 const {registrarUsuario, traerUsuarios, eliminarUsuario, verificarUsuario } = require('./usuarios-controller');
-const {autorizacion, autorizacionClientes, refreshToken} = require('../middleware');
+const {autorizacion, refreshToken} = require('../middleware');
 
 //RUTAS DEL ADMIN
 route.get('/api/usuarios', autorizacion, traerUsuarios  ); //falta autorizacion
@@ -12,7 +12,7 @@ route.post('/login', verificarUsuario );
 route.post('/usuarios', registrarUsuario );
 
 //RUTA AL PEDO ME PARECE
-route.post('refresh', refreshToken);
+route.post('/refresh', refreshToken);
 
 
 module.exports = route;

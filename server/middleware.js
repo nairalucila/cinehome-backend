@@ -1,5 +1,6 @@
 const { llave, refresh } = require("./config/config");
 const jwt = require("jsonwebtoken");
+const Usuario = require("./Usuarios/models").Usuarios;
 
 function autorizacion(req, res, next) {
   try {
@@ -20,6 +21,15 @@ function autorizacionClientes(req, res, next) {
   try {
     const token = req.headers["authorization"];
     let decoded = jwt.verify(token, llave);
+    console.log(decoded);
+/** _id:'61e70a615a22ab264456179b'
+contrasenia:'admin'
+email:'admin@admin.com'
+rol:'ADMIN'
+
+exp:1643210203
+*/
+
 
     if (decoded.usuario.rol === "CLIENTE") {
       next();
@@ -27,37 +37,57 @@ function autorizacionClientes(req, res, next) {
       return res.status(401).json("No autorizado");
     }
   } catch (error) {
-    return res.status(400).send("[Error Middleware Cliente]", error);
+    return res.status(401).json({error: error,
+      mensaje: "[No autorizado]", });
   }
 }
 
 const refreshToken = async (req, res) => {
+  const refreshToken = req.headers.authorization;
 
-    const refreshToken = req.headers.refresh;
+  /**
+   * if(!(refreshToken)){
+   * res.status.blabla.json(mensaje la bla)
+   * }
+   */
 
-    /**
-     * if(!(refreshToken)){
-     * res.status.blabla.json(mensaje la bla)
-     * }
+  if (!refreshToken) {
+    res.status(401).json({ mensaje: "No se pudo procesar su peticion" });
+  }
+
+  /***
+     * 
+iat:1643206603
+exp:1643210203
+_id:'61e70a615a22ab264456179b'
+contrasenia:'admin'
+email:'admin@admin.com'
+rol:'ADMIN'
      */
 
-    if (refreshToken) {
-      continue
-    } else {
-      res.status(401).json({ mensaje: "No se pudo procesar su peticion" });
-    }
-    try {
-      const verifyResult = jwt.verify(refreshToken, refresh);
-      console.log(verifyResult);
-      //traer el usuario de base de datos segun la decoficcacion(
-
-      const token = jwt.sign({usuarioEntrante: verifyResult}, llave, {expiresIn: '1h'},(err, token) => {
+  try {
+    const verifyResult = jwt.verify(refreshToken, llave);
+    console.log(verifyResult);
+    
+    const usuarioEntrante = await Usuario.findOne({
+      email: verifyResult.usuario.email,
+    });
+    res.json({
+      verifyR: verifyResult,
+      usuario: usuarioEntrante,
+    });
+    const token = jwt.sign(
+      { usuarioEntrante: verifyResult.usuario },
+      refresh,
+      { expiresIn: "1h" },
+      (err, token) => {
         return res.json({
           token,
           role: usuarioEntrante.rol,
           _id: usuarioEntrante._id,
         });
-      })
+      }
+    );
   } catch (error) {
     res.status(400).json({ mensaje: "No se pudo procesar su peticion x2" });
   }
@@ -66,5 +96,5 @@ const refreshToken = async (req, res) => {
 module.exports = {
   autorizacion,
   autorizacionClientes,
-  refreshToken
+  refreshToken,
 };
