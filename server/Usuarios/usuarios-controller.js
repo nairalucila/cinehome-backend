@@ -42,6 +42,7 @@ const verificarUsuario = async function (req, res) {
     };
 
     if (result) {
+      //700000
       jwt.sign({ usuario: usuarioEntrante}, config.llave, { expiresIn: "1h" }, (err, token) => {
         return res.json({
           token,
