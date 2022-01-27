@@ -1,4 +1,4 @@
-const { llave } = require("./config/config");
+const { llave, refresh } = require("./config/config");
 const jwt = require("jsonwebtoken");
 const { Usuarios } = require("./Usuarios/models");
 
@@ -49,9 +49,11 @@ function autorizacionClientes(req, res, next) {
 
 const generarNuevoToken = async (req, res) => {
   try {
-    const id = req.params.id;
-    const usuarioEntrante = await Usuarios({_id: id});
+    const tokenViejo = req.params.token;
+    let decoded = jwt.verify(tokenViejo, llave);
+if(de){
 
+}
     jwt.sign(
       { usuario: usuarioEntrante },
       llave,
