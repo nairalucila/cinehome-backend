@@ -1,4 +1,4 @@
-<div class="navcontainer" *ngIf="mostrarNav">
+<div class="navcontainer" *ngIf="isLoggedIn$ | async">
   <div class="menu-contenedor">
 
     <button mat-button routerLink="/home">

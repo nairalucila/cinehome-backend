@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from '../../../servicios/usuarios.service';
 import { UsuarioLogin, Usuarios}from '../../../models/usuarios';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicios/auth.service';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -23,19 +24,23 @@ export class RegistroComponent implements OnInit, OnDestroy {
   constructor(
     private fBuilder: FormBuilder,
     private usuarioService: UsuariosService,
-    private route: Router
+    private route: Router,
+    private authService: AuthService
   ) {
     this.caracterInvalid = true;
 
     this.show = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.loggedIn.next(false);
+  }
 
   cambiarTipoContrasenia() {
     this.show = !this.show;
   }
 
+  //ESTA FUNCION CONTROLA QUE SOLO SE INGRESEN NUMEROS EN EL CAMPO TELEFONO - PROBALA
   detectarIngresoLetras(event: any) {
     var charCode = event.which ? event.which : event.keyCode;
     // Sólo números 0-9

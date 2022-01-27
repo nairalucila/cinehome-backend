@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UsuarioLogin, Usuarios } from '../../../models/usuarios';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private usuarioService: UsuariosService,
     private route: Router,
     private _snackBar: MatSnackBar,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private authService: AuthService
   ) {
     this.estaLogueado = false;
     this.show = false;
@@ -40,8 +42,6 @@ export class LoginComponent implements OnInit {
         if (usuario) {
           this.cookie.set('token', usuario.token);
           this.cookie.set('rol', usuario.role);
-
-          //cookieService.set('test', 'Hello World', { expires: 2, sameSite: 'Lax' });
 
           localStorage.setItem('INITIALIZACION_IN', usuario._id);
           
@@ -83,5 +83,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.verificarUsuarioenBaseDatos2(this.loginForm.value);
+    this.authService.loggedIn.next(true);
   }
 }
