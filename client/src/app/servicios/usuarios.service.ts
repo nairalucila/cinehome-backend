@@ -19,36 +19,25 @@ export class UsuariosService {
     return this.http.post(loginApi, usuario);
   }
 
-  // loguearUsuario2(emailUsuario: string){
-  //   let urlConEndpoint = this.apiUrl + '?email=' + emailUsuario;
-  //   return this.http.get<Usuarios[]>(urlConEndpoint);
-  // }
-
-  // traerUsuario(endpoint: number) {
-  //   let urlConEndpoint = this.apiUrl + `/${endpoint}`;
-  //   return this.http.get(urlConEndpoint);
-  // }
-
   traerUsuarios() {
     let apiGetUsuario = this.apiUrlBack + 'api/usuarios';
     return this.http.get<Usuarios[]>(apiGetUsuario);
   }
-
-  // traerUsuarios() {
-  //   return this.http.get(this.apiUrl);
-  // }
 
   registrarUsuario(usuario: Usuarios): Observable<Usuarios> {
     let apiRegistrar = this.apiUrlBack + 'usuarios';
     return this.http.post<Usuarios>(apiRegistrar, usuario);
   }
 
-  // registrarUsuario(usuario: Usuarios): Observable<Usuarios> {
-  //   return this.http.post<Usuarios>(this.apiUrl, usuario)
-  // }
-
   eliminarUsuario(id: string) {
     let apiEliminar = this.apiUrlBack + 'api/usuarios/' + id;
     return this.http.delete(apiEliminar);
   }
+
+  //GENERAR NUEVO TOKEN
+  refreshToken(usuario: any) {
+    let loginApi = this.apiUrlBack + 'refresh';
+    return this.http.post(loginApi, usuario);
+  }
+
 }

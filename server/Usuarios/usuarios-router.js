@@ -10,7 +10,7 @@ route.post('/login', verificarUsuario );
 
 route.post('/usuarios', registrarUsuario );
 
-route.post('/refresh', generarNuevoToken );
+route.post('/refresh/:token', generarNuevoToken );
 
 
 

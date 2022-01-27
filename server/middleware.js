@@ -1,5 +1,6 @@
 const { llave } = require("./config/config");
 const jwt = require("jsonwebtoken");
+const { Usuarios } = require("./Usuarios/models");
 
 function autorizacion(req, res, next) {
   try {
@@ -48,7 +49,8 @@ function autorizacionClientes(req, res, next) {
 
 const generarNuevoToken = async (req, res) => {
   try {
-    const usuarioEntrante = req.body;
+    const id = req.params.id;
+    const usuarioEntrante = await Usuarios({_id: id});
 
     jwt.sign(
       { usuario: usuarioEntrante },
@@ -58,6 +60,7 @@ const generarNuevoToken = async (req, res) => {
         return res.json({
           token,
           role: usuarioEntrante.rol,
+          _id: usuarioEntrante._id
         });
       }
     );
