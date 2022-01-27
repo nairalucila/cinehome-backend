@@ -7,12 +7,14 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { AuthService } from '../servicios/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Guard1Guard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   //si es false te lo muestra en blanco.
 
@@ -24,8 +26,16 @@ export class Guard1Guard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    //debugger
     let idUsuarioLogueado = localStorage.getItem('INITIALIZACION_IN');
+
+    // this.authService.isLoggedIn.pipe(
+    //   take(1),
+    //   map((value: boolean) => {
+    //     if (!value) {
+    //     }
+    //   })
+    // );
+
     if (!idUsuarioLogueado) {
       this.router.navigate(['/home']);
       return false;

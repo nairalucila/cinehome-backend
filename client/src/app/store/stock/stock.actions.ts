@@ -5,4 +5,8 @@ export const modificarStock = createAction(
   props<any>()
 );
 
+export const ocultarNav = createAction(
+  '[Stock] Ocultar Barra navegacion',
+  props<{ esVisible: boolean }>()
+);
 
