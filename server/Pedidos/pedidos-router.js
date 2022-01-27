@@ -11,7 +11,7 @@ route.delete('/pedidos/:id', autorizacionClientes, eliminarPedido);
 route.delete('/usuario/pedidos/:id', autorizacionClientes, eliminarMuchosPedidos);
 
 //RUTAS ADMIN
-route.get('/api/pedidos', autorizacion , traerTodosPedidos); //middleware
+route.get('/api/pedidos', autorizacion , traerTodosPedidos); 
 
 
 

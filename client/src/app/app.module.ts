@@ -33,7 +33,7 @@ import { pedidosReducer } from './store/pedidos/pedidos.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PagarCompraComponent } from './componentes/pagar-compra/pagar-compra.component';
 import { stockReducer } from './store/stock/stock.reducer';
-import { JwtInterceptorService } from './interceptores/jwt-interceptor.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,11 +80,6 @@ import { JwtInterceptorService } from './interceptores/jwt-interceptor.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptorService,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptorService,
       multi: true,
     }
   ],

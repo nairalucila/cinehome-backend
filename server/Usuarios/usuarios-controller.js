@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 const express = require("express");
 const app = express();
-//const {llaveSeteada} = require('../server');
 
 const registrarUsuario = async function (req, res) {
   try {
@@ -42,8 +41,7 @@ const verificarUsuario = async function (req, res) {
     };
 
     if (result) {
-      //700000
-      jwt.sign({ usuario: usuarioEntrante}, config.llave, { expiresIn: "50000" }, (err, token) => {
+      jwt.sign({ usuario: usuarioEntrante}, config.llave, { expiresIn: "1h" }, (err, token) => {
         return res.json({
           token,
           role: usuarioEntrante.rol,
