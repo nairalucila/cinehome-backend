@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, throwError } from 'rxjs';
 import { UsuarioLogin, Usuarios } from '../models/usuarios';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuariosService {
-  apiUrl: string = 'https://61c5170cc003e70017b795a8.mockapi.io/users';
-  apiUrlBack: string = 'http://localhost:3000/';
+  //apiUrl: string = 'https://61c5170cc003e70017b795a8.mockapi.io/users';
+  //apiUrlBack: string = 'http://localhost:3000/';
 
   constructor(
     private http: HttpClient,
@@ -22,28 +23,26 @@ export class UsuariosService {
   ) {}
 
   loguearUsuario(usuario: any) {
-    let loginApi = this.apiUrlBack + 'login';
-    return this.http.post(loginApi, usuario);
+   
+    return this.http.post(environment.apiUrlBack  + 'login', usuario);
   }
 
   traerUsuarios() {
-    let apiGetUsuario = this.apiUrlBack + 'api/usuarios';
-    return this.http.get<Usuarios[]>(apiGetUsuario);
+  
+    return this.http.get<Usuarios[]>(environment.apiUrlBack + 'api/usuarios');
   }
 
   registrarUsuario(usuario: Usuarios): Observable<Usuarios> {
-    let apiRegistrar = this.apiUrlBack + 'usuarios';
-    return this.http.post<Usuarios>(apiRegistrar, usuario);
+ 
+    return this.http.post<Usuarios>(environment.apiUrlBack + 'usuarios', usuario);
   }
 
   eliminarUsuario(id: string) {
-    let apiEliminar = this.apiUrlBack + 'api/usuarios/' + id;
-    return this.http.delete(apiEliminar);
+    
+    return this.http.delete(environment.apiUrlBack + 'api/usuarios/' + id );
   }
 
   desloguearUsuario() {
-
-  
     localStorage.clear();
     this.cookie.deleteAll();
     this.route.navigate(['/login']);
@@ -52,9 +51,4 @@ export class UsuariosService {
     });
   }
 
-  //GENERAR NUEVO TOKEN
-  refreshToken(usuario: any) {
-    let loginApi = this.apiUrlBack + 'refresh';
-    return this.http.post(loginApi, usuario);
-  }
 }
