@@ -37,7 +37,7 @@ export class PeliculasService {
     //return environment.themoviedb +  `${movieId}` + this.concat_apikey_lang;
     return environment.themoviedb +  `${movieId}`+ this.url_api_relacionados;
   }
-/**'/similar?api_key=18f44261f2bdf99e218a95146792d24d&language=es&page=1' */
+
   obtenerPeliculaPorId(idPelicula: string){
    //let urlArmada =  this.construirUrl(idPelicula);
     return this.http.get<any>(this.construirUrl(idPelicula));
