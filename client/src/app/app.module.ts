@@ -22,7 +22,6 @@ import { HomeComponent } from './vistas/home/home.component';
 import { NavbarComponent } from './vistas/navbar/navbar.component';
 import { DetalleComponent } from './componentes/detalle/detalle.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminComponent } from './componentes/admin/admin.component';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
@@ -44,7 +43,6 @@ import { stockReducer } from './store/stock/stock.reducer';
     LoginComponent,
     RegistroComponent,
     DetalleComponent,
-    PerfilComponent,
     AdminComponent,
     PagarCompraComponent,
   ],

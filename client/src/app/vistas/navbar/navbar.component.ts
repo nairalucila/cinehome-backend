@@ -37,8 +37,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-    //OTRA COSA
     this.irPanelAdmin();
     this.pedidos$.subscribe({
       next: pedidos => {
@@ -48,6 +46,7 @@ export class NavbarComponent implements OnInit {
   }
 
   irPanelAdmin(){
+    
     let rol = this.cookie.get('rol');
     if(rol === "ADMIN"){
       this.esAdmin = true;

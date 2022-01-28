@@ -79,6 +79,7 @@ export class CarritoComponent implements OnInit, OnChanges {
   }
 
   pagar():void{
-   this.dialog.open(PagarCompraComponent)
+   this.dialog.open(PagarCompraComponent);
+   
   }
 }

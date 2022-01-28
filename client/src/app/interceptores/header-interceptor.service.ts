@@ -12,18 +12,16 @@ import { Observable, throwError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, map, tap } from 'rxjs/operators';
 import { UsuariosService } from '../servicios/usuarios.service';
+import { Error } from 'mongoose';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeaderInterceptorService implements HttpInterceptor {
-  token: string;
   constructor(
     private cookieService: CookieService,
     private usuarioService: UsuariosService
-  ) {
-    this.token = this.cookieService.get('token');
-  }
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -33,8 +31,9 @@ export class HeaderInterceptorService implements HttpInterceptor {
       return next.handle(req).pipe(catchError(this.manejarError));
     }
 
+    const token = this.cookieService.get('token')
     const headers = new HttpHeaders({
-      authorization: this.token,
+      authorization: token,
       'content-type': 'application/json',
     });
 
@@ -50,6 +49,9 @@ export class HeaderInterceptorService implements HttpInterceptor {
     
     if (err.status == 401) {
       this.usuarioService.desloguearUsuario();
+    }else{
+      //const errorStatus = new Error('Error en la peticion');
+      throw new Error('Error en la peticion');
     }
     return throwError({
       mensaje: 'Error en Interceptor',
