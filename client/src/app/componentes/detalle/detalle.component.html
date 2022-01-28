@@ -12,7 +12,7 @@
         <!-- detalle -->
         <div class="contenedor-desarrollo">
             <h1>{{detalles.original_title}}</h1>
-            <h5>{{detalles.genres}}</h5>
+            <h5>{{detalles.genres?.join(", ") }}</h5>
             <p>{{detalles.overview}}</p>
 
             <div class="votos-detalles">

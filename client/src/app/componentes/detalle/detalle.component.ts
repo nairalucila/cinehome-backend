@@ -64,8 +64,9 @@ export class DetalleComponent implements OnInit {
     this.peliculaService.obtenerPeliculaPorId(this.id).subscribe((peli) => {
       let generos: Genero[] = [];
       peli.genres.forEach((gen: any) => {
-        let g = gen.name;
+        let g = gen.name ;
         generos.push(g);
+        
       });
 
       this.detalles = {
@@ -102,8 +103,7 @@ export class DetalleComponent implements OnInit {
     });
   }
 
-  //TERMINAR FUNCIONALIDAD
-  agregarAlCarrito(pelicula: string, precio: any) {
+ agregarAlCarrito(pelicula: string, precio: any) {
     this.nuevoPedido = {
       titulo: pelicula,
       precio: precio,

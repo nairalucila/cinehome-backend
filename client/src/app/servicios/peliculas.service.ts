@@ -8,23 +8,19 @@ import { environment } from 'src/environments/environment';
 })
 export class PeliculasService {
   
-  //API URL FALTA PAG 1
+  //API PARA TRAER PELIS EN HOME
   apiUrlPopulares: string = "popular?api_key=18f44261f2bdf99e218a95146792d24d&language=ES&page=1";
-
-  // url_api_test: string = "https://api.themoviedb.org/3/movie/popular?api_key=18f44261f2bdf99e218a95146792d24d&language=ES&page=";
-
-  //API_MOVIE_PARAM
-  // url_api_id: string = "https://api.themoviedb.org/3/movie/{movie_id}"
 
   concat_apikey_lang: string = "?api_key=18f44261f2bdf99e218a95146792d24d&language=es-ES"
 
-  //IMAGE URL
+  //SE NECESITA ESTA URL PARA MOSTRAR IMAGENES
   img_url: string = "https://image.tmdb.org/t/p/w500/"
 
   idMovie: string = "";
   
+   //API PARA TRAER PELIS EN DETALLES RELACIONADAS A LA ELEGIDA
   url_api_relacionados: string = '/similar?api_key=18f44261f2bdf99e218a95146792d24d&language=es&page=1';
-  //this.idMovie + "
+  
 
   constructor(private http: HttpClient) {}
   
@@ -34,12 +30,12 @@ export class PeliculasService {
   }
 
   construirUrlRecomendados(movieId: string){
-    //return environment.themoviedb +  `${movieId}` + this.concat_apikey_lang;
+    
     return environment.themoviedb +  `${movieId}`+ this.url_api_relacionados;
   }
 
   obtenerPeliculaPorId(idPelicula: string){
-   //let urlArmada =  this.construirUrl(idPelicula);
+   
     return this.http.get<any>(this.construirUrl(idPelicula));
   }
 
@@ -49,7 +45,7 @@ export class PeliculasService {
 
 
   obtenerRelacionadas(movieId: string) {
-   // let urlArmada =  this.construirUrlRecomendados(movieId);
+ 
     return this.http.get<any>(this.construirUrlRecomendados(movieId));
   }
 }
