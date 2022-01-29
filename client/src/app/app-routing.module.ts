@@ -13,11 +13,11 @@ import { Guard1Guard } from './guard/guard1.guard';
 
 const appRoutes: Routes = [
   { path: 'registro', component: RegistroComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent , data: {hideNav: true}},
   
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   
-  { path: 'home', component: ListadoComponent},
+  { path: 'home', component: ListadoComponent, canActivate: [Guard1Guard]},
   
   { path: 'carrito', component: CarritoComponent, canActivate: [Guard1Guard]},
   

@@ -13,7 +13,6 @@ export class PedidosService {
   apiUrl: string = 'https://61c5170cc003e70017b795a8.mockapi.io/pedidos';
   apiUrlBack: string = 'http://localhost:3000/';
 
- // private pedidoEntrante = new Subject<Pedido[]>();
 
   constructor(private http: HttpClient, private store: Store) {}
 

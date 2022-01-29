@@ -11,6 +11,6 @@ export const pedidosReducer = createReducer(
   on(agregarPedido, function(state,  pedido) { return [...state, pedido]}),
   on(removerPedido, (state, {_id}) => state.filter(pedido => pedido._id != _id)),
   on(removerTodosPedidos, () => []),
-  on(inicializarListaPedidos, (state, {pedidos})=> pedidos)
+  on(inicializarListaPedidos, (state, {pedidos})=> [...pedidos])
   
 );

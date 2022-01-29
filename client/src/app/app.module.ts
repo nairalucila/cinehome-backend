@@ -32,7 +32,8 @@ import { pedidosReducer } from './store/pedidos/pedidos.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PagarCompraComponent } from './componentes/pagar-compra/pagar-compra.component';
 import { stockReducer } from './store/stock/stock.reducer';
-import { TestComponent } from './componentes/test/test.component';
+import { usuarioReducer } from './store/usuario/usuario.reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,7 @@ import { TestComponent } from './componentes/test/test.component';
     DetalleComponent,
     AdminComponent,
     PagarCompraComponent,
-    TestComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,7 @@ import { TestComponent } from './componentes/test/test.component';
     MatSnackBarModule,
     MatBadgeModule,
     StoreModule.forRoot({ pedidos: pedidosReducer,
-    stock: stockReducer }),
+    stock: stockReducer , usuario: usuarioReducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: false,
