@@ -1,7 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { By } from '@angular/platform-browser';
 import { provideMockStore } from '@ngrx/store/testing';
+import { of } from 'rxjs';
+import { UsuarioLogin, Usuarios } from 'src/app/models/usuarios';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 import { AdminComponent } from './admin.component';
@@ -12,9 +16,9 @@ describe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
   const initialState = {};
-  let mockUsuariosService: jasmine.SpyObj<UsuariosService>;
-  let listaUsuarios = lista;
-
+  let listaUsuarios = lista as Usuarios[];
+  const mockUsuariosService:jasmine.SpyObj<UsuariosService> = jasmine.createSpyObj('UsuariosService', ['traerUsuarios'])
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatSnackBarModule],
@@ -22,11 +26,12 @@ describe('AdminComponent', () => {
         provideMockStore({ initialState }),
         {
           provide: UsuariosService,
-          useValue: jasmine.createSpyObj('UsuariosService', ['traerUsuarios']),
+          useValue: mockUsuariosService,
         },
       ],
       declarations: [AdminComponent],
     }).compileComponents();
+    
   });
 
   beforeEach(() => {
@@ -35,30 +40,16 @@ describe('AdminComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create a button', () => {
-  // //  spyOn(component.traerListaUsuarios, 'click');
+  it('Deberia mostrar la lsita de usuarios', fakeAsync(() => {
+      mockUsuariosService.traerUsuarios.and.returnValue(of(listaUsuarios))
+      const listarUsuariosBoton = fixture.debugElement.query(By.css('#traerUs'))
+      listarUsuariosBoton.nativeElement.click()
+      fixture.detectChanges();
+      tick(5)
 
-  //   let button = fixture.debugElement.nativeElement.querySelector('traerUs');
-  //   button.onclick();
+      const tarjetasUsuarios = fixture.debugElement.query(By.css('.usuarios-panel'))
+      expect(component.listaUsuarios.length).toBe(tarjetasUsuarios.children.length)
+    })
+  )
 
-  //   fixture.whenStable().then(() => {
-  //     expect(component.traerListaUsuarios).toEqual(listaUsuarios);
-  //   });
-  //   //expect(component).toBeTruthy();
-  // });
-
-  it('should test a button', () => {
-    const traerListaUsuarios: any = component.traerListaUsuarios();
-    const spy = spyOn(traerListaUsuarios, 'listaUsuarios').and.returnValue(
-      listaUsuarios
-    );
-
-    const usuarios = traerListaUsuarios;
-    expect(usuarios).toBe(listaUsuarios);
-    expect(spy).toHaveBeenCalled();
-  });
-//https://www.youtube.com/watch?v=ubVHEwmmr-E
-  // it('Muestra una lista de usuarios', () => {
-  //   mockUsuariosService.traerUsuarios;
-  // });
 });

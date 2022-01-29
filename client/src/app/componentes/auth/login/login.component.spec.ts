@@ -29,7 +29,11 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Login titulo', () => {
+    expect(component.titulo).toEqual('Bienvenido, Ingrese sus datos');
   });
+
+  // it('Hola Coder', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });

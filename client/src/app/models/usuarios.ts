@@ -2,9 +2,9 @@ export interface Usuarios {
     _id?: string;
     nombreUsuario: string;
     email: string;
-    contrasenia: string;
+    contrasenia?: string;
     telefono: string;
-    rol: 'CLIENTE';
+    rol: 'CLIENTE' | 'ADMIN';
   }
   
   export interface UsuarioLogin {

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   });
 
   show: boolean;
+  titulo: string = "Bienvenido, Ingrese sus datos";
 
   constructor(
     private fBuilder: FormBuilder,
