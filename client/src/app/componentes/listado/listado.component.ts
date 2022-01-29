@@ -12,7 +12,6 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
-import { selectStock } from 'src/app/store/stock/stock.selection';
 
 @Component({
   selector: 'app-listado',
@@ -112,7 +111,5 @@ export class ListadoComponent implements OnInit, OnChanges {
           });
         }
       });
-
-    
   }
 }

@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
@@ -18,7 +17,7 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         MatSnackBarModule,
       ],
-      // providers: [provideMockStore({ initialState })],
+      
       declarations: [LoginComponent],
     }).compileComponents();
   });
@@ -33,7 +32,4 @@ describe('LoginComponent', () => {
     expect(component.titulo).toEqual('Bienvenido, Ingrese sus datos');
   });
 
-  // it('Hola Coder', () => {
-  //   expect(component).toBeTruthy();
-  // });
 });

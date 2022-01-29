@@ -28,9 +28,9 @@
 
         <!-- TRAER TODOS LOS USUARIOS -->
         <div class="usuarios-panel">
-            
+
             <div *ngFor=" let usuario of listaUsuarios">
-                <!-- mini card -->
+
                 <mat-card class="mini-card-admin">
                     <div class="titulo-usuarios">
                         <h4 style="color: #337A57;">ID: {{usuario._id}}</h4>
@@ -41,11 +41,11 @@
                 </mat-card>
             </div>
         </div>
-        <!-- TRAER TODOS PEDIDOS -->
 
+        <!-- TRAER TODOS PEDIDOS -->
         <div class="pedidos-panel">
             <div *ngFor=" let pedido of listaPedidos">
-                <!-- mini card -->
+
                 <mat-card class="mini-card-admin">
                     <div class="titulo-usuarios">
                         <h4 style="color: #9857F2">ID: {{pedido._id}}</h4>
@@ -55,9 +55,8 @@
 
                 </mat-card>
             </div>
-
-            
         </div>
+        <!-- TOTAL FACTURADO -->
         <div class="total" *ngIf="hayDinero">
             <h2>Total Facturado: $ {{totalFacturado}}</h2>
         </div>

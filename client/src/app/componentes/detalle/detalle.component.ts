@@ -6,7 +6,6 @@ import { PedidosService } from 'src/app/servicios/pedidos.service';
 import { Pedido } from 'src/app/models/pedidos';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
-import { selectStock } from 'src/app/store/stock/stock.selection';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -25,8 +24,7 @@ export class DetalleComponent implements OnInit {
   idUsuario: string;
 
   pedidos$ = this.store.select(selectPedidos);
-  stock$ = this.store.select(selectStock);
-
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,

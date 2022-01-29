@@ -1,8 +1,10 @@
 <div class="contenedor-login">
 
-  <div style="padding-top: 2rem">
+  <div style="padding-top: 2rem; color: #6f1e83; font-size: 32px;">
     <h1>{{titulo}}</h1>
   </div>
+
+  <!-- FORMULARIO LOGIN -->
 
   <form class="formulario-login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <p>
@@ -13,8 +15,7 @@
       </mat-form-field>
     </p>
 
-    <!-- Ver de cambiar el input -->
-    <p>
+     <p>
       <mat-form-field appearance="fill">
         <mat-label>Contraseña</mat-label>
         <input matInput [type]="show ? 'text': 'password'" formControlName="contrasenia">
@@ -29,11 +30,10 @@
 
   <div class="links-login">
     <span>No recuerda su contraseña? 
-      <!-- <mat-icon class="icon-link" matSuffix>sentiment_very_satisfied</mat-icon> -->
     </span>
 
     <div style="display: flex; flex-direction: row; justify-content: space-between ;">
-      <span class="badge">Si no tiene cuenta </span> <a [routerLink]="['/registro']">Registrese
+      <span class="badge">Si no tiene cuenta  </span><p> &nbsp; </p> <a style="color: #6f1e83; text-decoration: none" [routerLink]="['/registro']">Registrese
       </a>
     </div>
   </div>

@@ -13,8 +13,6 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { selectPedidos } from 'src/app/store/pedidos/pedidos.selector';
-import { selectStock } from 'src/app/store/stock/stock.selection';
-import { selectUsuarioIsLogged } from 'src/app/store/usuario/usuario.selection';
 
 @Component({
   selector: 'app-navbar',
@@ -30,8 +28,7 @@ export class NavbarComponent implements OnInit {
 
   totalPedidos: number = 0;
   pedidos$ = this.store.select(selectPedidos);
-  stock$ = this.store.select(selectStock);
-
+  
   //Almacena la referencia del observable
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn;
 
