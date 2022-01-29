@@ -6,9 +6,8 @@ const {autorizacion } = require('../middleware');
 route.get('/api/usuarios', autorizacion, traerUsuarios  ); 
 route.delete('/api/usuarios/:id', autorizacion, eliminarUsuario); 
 
+//RUTAS DEL CLIENTE
 route.post('/login', verificarUsuario );
-
 route.post('/usuarios', registrarUsuario );
-
 
 module.exports = route;
