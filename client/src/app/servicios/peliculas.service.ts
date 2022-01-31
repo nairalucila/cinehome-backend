@@ -13,9 +13,6 @@ export class PeliculasService {
 
   concat_apikey_lang: string = "?api_key=18f44261f2bdf99e218a95146792d24d&language=es-ES"
 
-  //SE NECESITA ESTA URL PARA MOSTRAR IMAGENES
-  img_url: string = "https://image.tmdb.org/t/p/w500/"
-
   idMovie: string = "";
   
    //API PARA TRAER PELIS EN DETALLES RELACIONADAS A LA ELEGIDA
@@ -30,12 +27,10 @@ export class PeliculasService {
   }
 
   construirUrlRecomendados(movieId: string){
-    
     return environment.themoviedb +  `${movieId}`+ this.url_api_relacionados;
   }
 
   obtenerPeliculaPorId(idPelicula: string){
-   
     return this.http.get<any>(this.construirUrl(idPelicula));
   }
 
@@ -43,9 +38,7 @@ export class PeliculasService {
       return this.http.get<Peliculas[]>(environment.themoviedb + this.apiUrlPopulares + i);
   }
 
-
   obtenerRelacionadas(movieId: string) {
- 
     return this.http.get<any>(this.construirUrlRecomendados(movieId));
   }
 }

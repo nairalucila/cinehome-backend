@@ -18,7 +18,6 @@ import { LoginComponent } from './componentes/auth/login/login.component';
 import { RegistroComponent } from './componentes/auth/registro/registro.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { ListadoComponent } from './componentes/listado/listado.component';
-import { HomeComponent } from './vistas/home/home.component';
 import { NavbarComponent } from './vistas/navbar/navbar.component';
 import { DetalleComponent } from './componentes/detalle/detalle.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -38,7 +37,6 @@ import { PagarCompraComponent } from './componentes/pagar-compra/pagar-compra.co
     NavbarComponent,
     ListadoComponent,
     CarritoComponent,
-    HomeComponent,
     LoginComponent,
     RegistroComponent,
     DetalleComponent,
@@ -66,9 +64,9 @@ import { PagarCompraComponent } from './componentes/pagar-compra/pagar-compra.co
     MatBadgeModule,
     StoreModule.forRoot({ pedidos: pedidosReducer}),
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
+      maxAge: 25, 
       logOnly: false,
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      autoPause: true, 
     }),
     
   ],
@@ -81,6 +79,5 @@ import { PagarCompraComponent } from './componentes/pagar-compra/pagar-compra.co
     }
   ],
   bootstrap: [AppComponent],
-  // schemas: [ CUSTOM_ELEMENTS_SCHEMA]
-})
+  })
 export class AppModule {}

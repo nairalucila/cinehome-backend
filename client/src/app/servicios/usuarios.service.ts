@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UsuariosService {
-  //apiUrl: string = 'https://61c5170cc003e70017b795a8.mockapi.io/users';
   //apiUrlBack: string = 'http://localhost:3000/';
 
   constructor(

@@ -28,8 +28,7 @@ export class NavbarComponent implements OnInit {
 
   totalPedidos: number = 0;
   pedidos$ = this.store.select(selectPedidos);
-  
-  //Almacena la referencia del observable
+
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn;
 
   constructor(
@@ -41,22 +40,31 @@ export class NavbarComponent implements OnInit {
   ) {
     this.mostrarNav = true;
     this.hayProductos = false;
-    this.esAdmin = true;
+    this.esAdmin = false;
   }
 
   ngOnInit(): void {
-    this.route.events
-      .pipe(filter((evt) => evt instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        console.log(event);
-        if (event.url == '/login' || event.url == '/registro') {
-          this.esVisible = false;
-        } else {
-          this.esVisible = true;
-        }
-      });
+    const cambiosRuta$ = this.route.events.pipe(
+      filter((evt) => evt instanceof NavigationEnd)
+    );
 
-    this.irPanelAdmin();
+    cambiosRuta$.subscribe((event: any) => {
+      console.log(event);
+      if (
+        event.url == '/login' ||
+        event.url == '/registro' ||
+        event.urlAfterRedirects == '/login'
+      ) {
+        this.esVisible = false;
+      } else {
+        this.esVisible = true;
+      }
+    });
+
+    cambiosRuta$.subscribe(() => {
+      this.irPanelAdmin();
+    });
+
     this.pedidos$.subscribe({
       next: (pedidos) => {
         this.totalPedidos = pedidos.length;
@@ -66,8 +74,8 @@ export class NavbarComponent implements OnInit {
 
   irPanelAdmin() {
     let rol = this.cookie.get('rol');
-    if (rol === 'CLIENTE') {
-      this.esAdmin = false;
+    if (rol == 'ADMIN') {
+      this.esAdmin = true;
     }
   }
 
