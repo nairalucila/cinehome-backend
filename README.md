@@ -2,7 +2,7 @@
 ### Para iniciar esta aplicación primero corra el comando npm i
 ### Luego ejecute npm start para inciar el servidor Node y Angular. Tenga en cuenta lo siguiente. Ud. se encuentra en la carpeta inicial y en la misma linea de jerarquía se encuentra la carpeta 'client' correspondiente al front y 'server' correspondiente al backend. 
 
-### Luego de haber ejecutado `npm i` vaya a su navegador e ingrese localhost:/4200
+### Luego de haber ejecutado `npm i` vaya a su navegador e ingrese `localhost:/4200`
 
 ## Nota Importante:
 ### Se le proporciona un usuario Admin creado, este usuario admin no puede comprar productos ni eliminar pedidos. Solo puede ingresar al Panel, que se encuenta en la barra de navegación para ver pedidos, el monto total facturado y también podrá eliminar usuarios. ####(Que se yo capaz que a alguno le cayó mal).
