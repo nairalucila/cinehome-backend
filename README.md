@@ -1,4 +1,4 @@
-# cinehome-backend
+# Cinehome by Naira Coppari
 ### Para iniciar esta aplicación primero corra el comando npm i
 ### Luego ejecute npm start para inciar el servidor Node y Angular. Tenga en cuenta lo siguiente. Ud. se encuentra en la carpeta inicial y en la misma linea de jerarquía se encuentra la carpeta 'client' correspondiente al front y 'server' correspondiente al backend. 
 
