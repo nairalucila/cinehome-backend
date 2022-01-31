@@ -4,7 +4,7 @@
 
 ### Luego de haber ejecutado `npm i` vaya a su navegador e ingrese `localhost:/4200`
 
-## Nota Importante:
+## Admin
 ### Se le proporciona un usuario Admin creado, este usuario admin no puede comprar productos ni eliminar pedidos. Solo puede ingresar al Panel, que se encuenta en la barra de navegación para ver pedidos, el monto total facturado y también podrá eliminar usuarios.
 `
 {
