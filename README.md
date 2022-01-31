@@ -5,16 +5,16 @@
 ### Luego de haber ejecutado `npm i` vaya a su navegador e ingrese `localhost:/4200`
 
 ## Nota Importante:
-### Se le proporciona un usuario Admin creado, este usuario admin no puede comprar productos ni eliminar pedidos. Solo puede ingresar al Panel, que se encuenta en la barra de navegación para ver pedidos, el monto total facturado y también podrá eliminar usuarios. ####(Que se yo capaz que a alguno le cayó mal).
-
+### Se le proporciona un usuario Admin creado, este usuario admin no puede comprar productos ni eliminar pedidos. Solo puede ingresar al Panel, que se encuenta en la barra de navegación para ver pedidos, el monto total facturado y también podrá eliminar usuarios.
+`
 {
 	email: admin@admin.com,
 	contrasenia: admin
 }
-
+`
 ## Clientes
-### Ud. podrá registrarse en la ruta localhost:/4200/registro e iniciar sesion con su email y contrasenia en nuestro sistema. Importante: Todo usuario registrado tiene rol: CLIENTE. 
+### Ud. podrá registrarse en la ruta `localhost:/4200/registro` e iniciar sesion con su email y contrasenia en nuestro sistema. Importante: Todo usuario registrado tiene `rol: CLIENTE`. 
 ### Una vez dentro del sistema ud. puede alquilar peliculas, ver las descripciones o listar relacionadas y tambien podrá manipular sus pedidos.
 
-### Happy Shopping!
+### `Happy Shopping!`
 
